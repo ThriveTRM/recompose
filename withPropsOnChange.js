@@ -13,6 +13,8 @@ var _react = require("react");
 
 var _reactLifecyclesCompat = require("react-lifecycles-compat");
 
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
+
 var _pick = _interopRequireDefault(require("./utils/pick"));
 
 var _shallowEqual = _interopRequireDefault(require("./shallowEqual"));
@@ -23,7 +25,7 @@ var _wrapDisplayName = _interopRequireDefault(require("./wrapDisplayName"));
 
 var withPropsOnChange = function withPropsOnChange(shouldMapOrKeys, propsMapper) {
   return function (BaseComponent) {
-    var factory = (0, _react.createFactory)(BaseComponent);
+    var factory = (0, _createFactory.default)(BaseComponent);
     var shouldMap = typeof shouldMapOrKeys === 'function' ? shouldMapOrKeys : function (props, nextProps) {
       return !(0, _shallowEqual.default)((0, _pick.default)(props, shouldMapOrKeys), (0, _pick.default)(nextProps, shouldMapOrKeys));
     };

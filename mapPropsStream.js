@@ -5,9 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = exports.mapPropsStreamWithConfig = void 0;
 
-var _react = require("react");
-
 var _symbolObservable = _interopRequireDefault(require("symbol-observable"));
+
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
 
 var _componentFromStream = require("./componentFromStream");
 
@@ -28,7 +28,7 @@ var mapPropsStreamWithConfig = function mapPropsStreamWithConfig(config) {
   });
   return function (transform) {
     return function (BaseComponent) {
-      var factory = (0, _react.createFactory)(BaseComponent);
+      var factory = (0, _createFactory.default)(BaseComponent);
       var fromESObservable = config.fromESObservable,
           toESObservable = config.toESObservable;
       return componentFromStream(function (props$) {

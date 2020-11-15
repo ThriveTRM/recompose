@@ -1,4 +1,4 @@
-import React, { createFactory, Component, createElement } from 'react';
+import React, { createElement, Component } from 'react';
 import _extends from '@babel/runtime/helpers/esm/extends';
 import _inheritsLoose from '@babel/runtime/helpers/esm/inheritsLoose';
 import { polyfill } from 'react-lifecycles-compat';
@@ -6,6 +6,12 @@ import _objectWithoutPropertiesLoose from '@babel/runtime/helpers/esm/objectWith
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { createChangeEmitter } from 'change-emitter';
 import $$observable from 'symbol-observable';
+
+// https://reactjs.org/blog/2020/02/26/react-v16.13.0.html#deprecating-reactcreatefactory
+
+var createFactory = function createFactory(type) {
+  return createElement.bind(null, type);
+};
 
 var setStatic = function setStatic(key, value) {
   return function (BaseComponent) {
@@ -831,8 +837,8 @@ var fromRenderProps = function fromRenderProps(RenderPropsComponent, propsMapper
   }
 
   return function (BaseComponent) {
-    var baseFactory = React.createFactory(BaseComponent);
-    var renderPropsFactory = React.createFactory(RenderPropsComponent);
+    var baseFactory = createFactory(BaseComponent);
+    var renderPropsFactory = createFactory(RenderPropsComponent);
 
     var FromRenderProps = function FromRenderProps(ownerProps) {
       var _renderPropsFactory;

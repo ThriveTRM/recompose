@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = _interopRequireDefault(require("react"));
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
 
 var _setDisplayName = _interopRequireDefault(require("./setDisplayName"));
 
@@ -19,9 +19,8 @@ var fromRenderProps = function fromRenderProps(RenderPropsComponent, propsMapper
   }
 
   return function (BaseComponent) {
-    var baseFactory = _react.default.createFactory(BaseComponent);
-
-    var renderPropsFactory = _react.default.createFactory(RenderPropsComponent);
+    var baseFactory = (0, _createFactory.default)(BaseComponent);
+    var renderPropsFactory = (0, _createFactory.default)(RenderPropsComponent);
 
     var FromRenderProps = function FromRenderProps(ownerProps) {
       var _renderPropsFactory;

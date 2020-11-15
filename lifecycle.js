@@ -11,6 +11,8 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = require("react");
 
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
+
 var _setDisplayName = _interopRequireDefault(require("./setDisplayName"));
 
 var _wrapDisplayName = _interopRequireDefault(require("./wrapDisplayName"));
@@ -18,7 +20,7 @@ var _wrapDisplayName = _interopRequireDefault(require("./wrapDisplayName"));
 /* eslint-disable no-console */
 var lifecycle = function lifecycle(spec) {
   return function (BaseComponent) {
-    var factory = (0, _react.createFactory)(BaseComponent);
+    var factory = (0, _createFactory.default)(BaseComponent);
 
     if (process.env.NODE_ENV !== 'production' && spec.hasOwnProperty('render')) {
       console.error('lifecycle() does not support the render method; its behavior is to ' + 'pass all props and state to the base component.');

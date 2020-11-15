@@ -14,6 +14,12 @@ var hoistNonReactStatics = _interopDefault(require('hoist-non-react-statics'));
 var changeEmitter = require('change-emitter');
 var $$observable = _interopDefault(require('symbol-observable'));
 
+// https://reactjs.org/blog/2020/02/26/react-v16.13.0.html#deprecating-reactcreatefactory
+
+var createFactory = function createFactory(type) {
+  return React.createElement.bind(null, type);
+};
+
 var setStatic = function setStatic(key, value) {
   return function (BaseComponent) {
     /* eslint-disable no-param-reassign */
@@ -46,7 +52,7 @@ var wrapDisplayName = function wrapDisplayName(BaseComponent, hocName) {
 
 var mapProps = function mapProps(propsMapper) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var MapProps = function MapProps(props) {
       return factory(propsMapper(props));
@@ -152,7 +158,7 @@ function shallowEqual(objA, objB) {
 
 var withPropsOnChange = function withPropsOnChange(shouldMapOrKeys, propsMapper) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
     var shouldMap = typeof shouldMapOrKeys === 'function' ? shouldMapOrKeys : function (props, nextProps) {
       return !shallowEqual(pick(props, shouldMapOrKeys), pick(nextProps, shouldMapOrKeys));
     };
@@ -226,7 +232,7 @@ var mapValues = function mapValues(obj, func) {
 
 var withHandlers = function withHandlers(handlers) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var WithHandlers =
     /*#__PURE__*/
@@ -275,7 +281,7 @@ var withHandlers = function withHandlers(handlers) {
 
 var defaultProps = function defaultProps(props) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var DefaultProps = function DefaultProps(ownerProps) {
       return factory(ownerProps);
@@ -353,7 +359,7 @@ var renameProps = function renameProps(nameMap) {
 
 var flattenProp = function flattenProp(propName) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var FlattenProp = function FlattenProp(props) {
       return factory(_extends({}, props, props[propName]));
@@ -369,7 +375,7 @@ var flattenProp = function flattenProp(propName) {
 
 var withState = function withState(stateName, stateUpdaterName, initialState) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var WithState =
     /*#__PURE__*/
@@ -421,7 +427,7 @@ var withState = function withState(stateName, stateUpdaterName, initialState) {
 
 var withStateHandlers = function withStateHandlers(initialState, stateUpdaters) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var WithStateHandlers =
     /*#__PURE__*/
@@ -478,7 +484,7 @@ var noop = function noop() {};
 
 var withReducer = function withReducer(stateName, dispatchName, reducer, initialState) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var WithReducer =
     /*#__PURE__*/
@@ -559,11 +565,11 @@ var branch = function branch(test, left, right) {
 
     var Branch = function Branch(props) {
       if (test(props)) {
-        leftFactory = leftFactory || React.createFactory(left(BaseComponent));
+        leftFactory = leftFactory || createFactory(left(BaseComponent));
         return leftFactory(props);
       }
 
-      rightFactory = rightFactory || React.createFactory(right(BaseComponent));
+      rightFactory = rightFactory || createFactory(right(BaseComponent));
       return rightFactory(props);
     };
 
@@ -577,7 +583,7 @@ var branch = function branch(test, left, right) {
 
 var renderComponent = function renderComponent(Component) {
   return function (_) {
-    var factory = React.createFactory(Component);
+    var factory = createFactory(Component);
 
     var RenderComponent = function RenderComponent(props) {
       return factory(props);
@@ -615,7 +621,7 @@ var renderNothing = function renderNothing(_) {
 
 var shouldUpdate = function shouldUpdate(test) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var ShouldUpdate =
     /*#__PURE__*/
@@ -696,7 +702,7 @@ var onlyUpdateForPropTypes = function onlyUpdateForPropTypes(BaseComponent) {
 
 var withContext = function withContext(childContextTypes, getChildContext) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var WithContext =
     /*#__PURE__*/
@@ -740,7 +746,7 @@ var withContext = function withContext(childContextTypes, getChildContext) {
 
 var getContext = function getContext(contextTypes) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     var GetContext = function GetContext(ownerProps, context) {
       return factory(_extends({}, ownerProps, context));
@@ -758,7 +764,7 @@ var getContext = function getContext(contextTypes) {
 
 var lifecycle = function lifecycle(spec) {
   return function (BaseComponent) {
-    var factory = React.createFactory(BaseComponent);
+    var factory = createFactory(BaseComponent);
 
     if (process.env.NODE_ENV !== 'production' && spec.hasOwnProperty('render')) {
       console.error('lifecycle() does not support the render method; its behavior is to ' + 'pass all props and state to the base component.');
@@ -838,8 +844,8 @@ var fromRenderProps = function fromRenderProps(RenderPropsComponent, propsMapper
   }
 
   return function (BaseComponent) {
-    var baseFactory = React__default.createFactory(BaseComponent);
-    var renderPropsFactory = React__default.createFactory(RenderPropsComponent);
+    var baseFactory = createFactory(BaseComponent);
+    var renderPropsFactory = createFactory(RenderPropsComponent);
 
     var FromRenderProps = function FromRenderProps(ownerProps) {
       var _renderPropsFactory;
@@ -925,7 +931,7 @@ var nest = function nest() {
     Components[_key] = arguments[_key];
   }
 
-  var factories = Components.map(React.createFactory);
+  var factories = Components.map(createFactory);
 
   var Nest = function Nest(_ref) {
     var children = _ref.children,
@@ -1069,7 +1075,7 @@ var mapPropsStreamWithConfig = function mapPropsStreamWithConfig(config$$1) {
   });
   return function (transform) {
     return function (BaseComponent) {
-      var factory = React.createFactory(BaseComponent);
+      var factory = createFactory(BaseComponent);
       var fromESObservable = config$$1.fromESObservable,
           toESObservable = config$$1.toESObservable;
       return componentFromStream$$1(function (props$) {
