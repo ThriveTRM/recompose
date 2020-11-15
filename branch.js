@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
 
 var _setDisplayName = _interopRequireDefault(require("./setDisplayName"));
 
@@ -26,11 +26,11 @@ var branch = function branch(test, left, right) {
 
     var Branch = function Branch(props) {
       if (test(props)) {
-        leftFactory = leftFactory || (0, _react.createFactory)(left(BaseComponent));
+        leftFactory = leftFactory || (0, _createFactory.default)(left(BaseComponent));
         return leftFactory(props);
       }
 
-      rightFactory = rightFactory || (0, _react.createFactory)(right(BaseComponent));
+      rightFactory = rightFactory || (0, _createFactory.default)(right(BaseComponent));
       return rightFactory(props);
     };
 

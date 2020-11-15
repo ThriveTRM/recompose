@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _react = require("react");
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
 
 var _setDisplayName = _interopRequireDefault(require("./setDisplayName"));
 
@@ -15,7 +15,7 @@ var _wrapDisplayName = _interopRequireDefault(require("./wrapDisplayName"));
 
 var flattenProp = function flattenProp(propName) {
   return function (BaseComponent) {
-    var factory = (0, _react.createFactory)(BaseComponent);
+    var factory = (0, _createFactory.default)(BaseComponent);
 
     var FlattenProp = function FlattenProp(props) {
       return factory((0, _extends2.default)({}, props, props[propName]));

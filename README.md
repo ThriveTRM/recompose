@@ -1,6 +1,4 @@
 recompose
 =========
 
-[![npm version](https://img.shields.io/npm/v/recompose.svg?style=flat-square)](https://www.npmjs.com/package/recompose)
-
-Recompose is a React utility belt for function components and higher-order components. See the [GitHub project page](https://github.com/acdlite/recompose) for more information.
+This repo is a clone of the abandoned [https://github.com/acdlite/recompose](https://github.com/acdlite/recompose) library so that we can maintain compatibility with newer versions of React. For full details and instructions on how to release new versions, please see [https://github.com/ThriveTRM/recompose-source](https://github.com/ThriveTRM/recompose-source).

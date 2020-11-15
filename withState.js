@@ -11,13 +11,15 @@ var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inh
 
 var _react = require("react");
 
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
+
 var _setDisplayName = _interopRequireDefault(require("./setDisplayName"));
 
 var _wrapDisplayName = _interopRequireDefault(require("./wrapDisplayName"));
 
 var withState = function withState(stateName, stateUpdaterName, initialState) {
   return function (BaseComponent) {
-    var factory = (0, _react.createFactory)(BaseComponent);
+    var factory = (0, _createFactory.default)(BaseComponent);
 
     var WithState =
     /*#__PURE__*/

@@ -5,13 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _react = require("react");
+var _createFactory = _interopRequireDefault(require("./utils/createFactory"));
 
 var _wrapDisplayName = _interopRequireDefault(require("./wrapDisplayName"));
 
 var renderComponent = function renderComponent(Component) {
   return function (_) {
-    var factory = (0, _react.createFactory)(Component);
+    var factory = (0, _createFactory.default)(Component);
 
     var RenderComponent = function RenderComponent(props) {
       return factory(props);
